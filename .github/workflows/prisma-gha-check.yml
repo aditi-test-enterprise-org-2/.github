@@ -1,0 +1,30 @@
+name: Prisma-Security-Scan
+
+on:
+  push:
+    branches: [ "master", "main" ]
+  pull_request:
+    branches: [ "master", "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Prisma Cloud GHA Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4  # Updated to latest version
+
+      - name: Run Prisma Cloud
+        id: Prisma-Cloud
+        uses: bridgecrewio/checkov-action@master
+        env:
+          PRISMA_API_URL: ${{ secrets.PRISMA_API_URL }}
+        with:
+          api-key: ${{ secrets.BC_API_KEY }}
+          use_enforcement_rules: true
+
+      - name: Ensure Workflow Always Runs
+        if: always()  # Guarantees execution even if previous steps fail
+        run: echo "Workflow executed successfully for ${{ github.repository }} on branch ${{ github.ref }}"
