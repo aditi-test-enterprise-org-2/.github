@@ -2,9 +2,13 @@ name: Prisma-Security-Scan
 
 on:
   push:
-    branches: [ "master", "main" ]
+    branches:
+      - main
+      - master
   pull_request:
-    branches: [ "master", "main" ]
+    branches: 
+      - main
+      - master
   workflow_dispatch:
 
 jobs:
