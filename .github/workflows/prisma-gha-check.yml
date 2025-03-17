@@ -3,8 +3,7 @@ name: Prisma-Security-Scan
 on:
   push:
     branches:
-      - "main"
-      - "master"
+      - main
   pull_request:
     branches: ["main", "master"]
   workflow_dispatch:
@@ -26,7 +25,3 @@ jobs:
         with:
           api-key: ${{ secrets.BC_API_KEY }}
           use_enforcement_rules: true
-
-      - name: Ensure Workflow Always Runs
-        if: always()  # Guarantees execution even if previous steps fail
-        run: echo "Workflow executed successfully for ${{ github.repository }} on branch ${{ github.ref }}"
