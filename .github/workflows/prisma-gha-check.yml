@@ -1,11 +1,9 @@
 name: Prisma-Security-Scan
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
-    branches: ["main", "master"]
+    branches: 
+      - main
   workflow_dispatch:
 
 jobs:
@@ -15,7 +13,7 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4  # Updated to latest version
+        uses: actions/checkout@v4 
 
       - name: Run Prisma Cloud
         id: Prisma-Cloud
